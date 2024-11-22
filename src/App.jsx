@@ -37,6 +37,10 @@ export default App*/
 import * as React from "react";
 
 //const title = "React";
+const welcome = {
+  title: "React",
+  greeting: "Hey",
+};
 
 const list = [
   {
@@ -57,42 +61,57 @@ const list = [
   },
 ];
 
-const welcome = {
-  title: "React",
-  greeting: "Hey",
-};
-
 const candies = ["Chocolate", "Gummies", "Candy Canes", "Tamarindo"];
 
-function App() {
-  
-
-  return (
+const App = () => (
     <div>
       <h1>
         {welcome.greeting} {welcome.title}
       </h1>
+      <Search />
+      <hr />
+      <List />
+     
+      <hr />
+      <Candies />
+    </div>
+);
 
+
+
+const Search = () => (
+    <div>
       <label htmlFor="search">Search: </label>
       <input id="search" type="text" />
+    </div>
+);
 
-       <hr />
 
-      <ul>
+const List = () => (
+    <ul>
+      {list.map((item) => {
+        return (
+          <li key={item.objectID}>
+            <span>
+              <a href={item.url}>{item.title}</a>
+            </span>
+            <span> {item.author}</span>
+            <span> {item.num_comments}</span>
+            <span> {item.points}</span>
+          </li>
+        );
+      })}
+    </ul>
+);
+
+const Candies = () => (
+    <div>
+        <ul>
         {candies.map((candy, index) => (
           <li key={index}>{candy} </li>
         ))}
       </ul>
-
-      <ul>
-        {list.map(function (item) {return <li key={item.objectID}>
-          <span><a href={item.url}>{item.title}</a></span>
-          <span> {item.author}</span>
-          <span> {item.num_comments}</span>
-          <span> {item.points}</span>
-        </li>})}
-      </ul>
     </div>
-  );
-}
+);
+
 export default App;
